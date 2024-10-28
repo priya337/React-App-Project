@@ -1,18 +1,14 @@
-
-import './App.css'
+import "./App.css";
+import Footer from "./Footer.jsx";
 
 function App() {
-
   return (
     <>
       <div>
-        
-      </div>
-      <div>
-
+        <Footer />
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
