@@ -1,0 +1,11 @@
+/* App.css */
+
+.app-container {
+  display: flex;
+}
+
+.main-content {
+  flex: 1;
+  padding: 20px;
+  background-color: #f4f5f7;
+}
