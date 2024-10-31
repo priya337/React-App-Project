@@ -1,8 +1,8 @@
 // App.jsx
 import React from "react";
-import Sidebar from "./Sidebar";
+import KanbanBoard from "./Sidebar";
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
   return (
@@ -17,5 +17,4 @@ const App = () => {
     </div>
   );
 };
-
 export default App;
