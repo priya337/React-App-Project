@@ -1,7 +1,7 @@
 // App.jsx
-import React from 'react';
-import KanbanBoard from './Sidebar';
-import './App.css';
+import React from "react";
+import KanbanBoard from "./Sidebar";
+import "./App.css";
 
 const App = () => {
   return (
@@ -10,6 +10,4 @@ const App = () => {
     </div>
   );
 };
->>>>>>> 85132046ba2b0ce1dbca16ea563e7fe77724bb96
-
 export default App;
