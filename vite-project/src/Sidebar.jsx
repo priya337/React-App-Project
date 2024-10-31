@@ -1,45 +1,62 @@
-// KanbanBoard.jsx
+// Sidebar.jsx
 import React from 'react';
-import './SidebarKanban.css';
+import './Sidebar.css';
 
-const KanbanBoard = () => {
-  // Static task data categorized by status
-  const tasks = [
-    { id: "1", title: "Design Landing Page", status: "Backlog", priority: "High" },
-    { id: "2", title: "Develop User Registration", status: "To-Do", priority: "Medium" },
-    { id: "3", title: "Bug Fix: Login Issue", status: "In Progress", priority: "High" },
-    { id: "4", title: "Release Version 1.0", status: "Waiting", priority: "High" },
-    { id: "5", title: "Update Documentation", status: "Completed", priority: "Low" },
-  ];
-
-  // Group tasks by status
-  const groupedTasks = {
-    "Backlog": tasks.filter(task => task.status === "Backlog"),
-    "To-Do": tasks.filter(task => task.status === "To-Do"),
-    "In Progress": tasks.filter(task => task.status === "In Progress"),
-    "Waiting": tasks.filter(task => task.status === "Waiting"),
-    "Completed": tasks.filter(task => task.status === "Completed"),
-  };
-
+const Sidebar = () => {
   return (
-    <div className="kanban-board-container">
-      <div className="kanban-board">
-        {Object.keys(groupedTasks).map(status => (
-          <div key={status} className={`kanban-column ${status.replace(" ", "-").toLowerCase()}`}>
-            <h3>{status}</h3>
-            <ul>
-              {groupedTasks[status].map(task => (
-                <li key={task.id} className="task-item">
-                  <h4>{task.title}</h4>
-                  <p><strong>Priority:</strong> {task.priority}</p>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+    <div className="sidebar">
+      {/* Integrations */}
+      <div className="sidebar-header">
+        <span>Web</span>
+        <div className="icon integrations-icon"></div>
+      </div>
+
+      {/* Members */}
+      <div className="sidebar-section">
+        <h3>Members</h3>
+        <div className="members-list">
+          {/* Placeholder avatars */}
+          <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZsb3dlcnN8fDB8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200" alt="Anna" className="member-avatar" />
+          <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDU4fHxmbG93ZXJzfHx8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200" alt="Mirela" className="member-avatar" />
+          <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDU4fHxmbG93ZXJzfHx8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200" alt="Priya" className="member-avatar" />
+          <button className="invite-button">+Invite</button>
+        </div>
+      </div>
+
+      {/* Connected Boards */}
+      <div className="sidebar-section">
+        <h3>Connected boards</h3>
+        <div className="board-toggle">
+          <input type="checkbox" checked />
+          <label>Product</label>
+        </div>
+        <div className="board-toggle">
+          <input type="checkbox" checked />
+          <label>Desktop</label>
+        </div>
+        <div className="board-toggle">
+          <input type="checkbox" />
+          <label>Mobile</label>
+        </div>
+      </div>
+
+      {/* Calendars */}
+      <div className="sidebar-section">
+        <h3>Calendars</h3>
+        <div className="calendar-item">
+          <span>ps@gmail.com</span>
+        </div>
+        <div className="calendar-toggle">
+          <input type="checkbox" checked />
+          <label>Events</label>
+        </div>
+        <div className="calendar-toggle">
+          <input type="checkbox" />
+          <label>Workouts</label>
+        </div>
       </div>
     </div>
   );
 };
 
-export default KanbanBoard;
+export default Sidebar;
