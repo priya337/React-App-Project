@@ -7,7 +7,8 @@
     "status": "To Do",
     "priority": "High",
     "createdDate": "2023-09-15",
-    "dueDate": "2023-09-30"
+    "dueDate": "2023-09-30",
+    "category": "Product"
   },
   {
     "id": "2",
@@ -17,7 +18,8 @@
     "status": "In Progress",
     "priority": "Medium",
     "createdDate": "2023-09-16",
-    "dueDate": "2023-10-10"
+    "dueDate": "2023-10-10",
+    "category": "Desktop"
   },
   {
     "id": "3",
@@ -27,7 +29,8 @@
     "status": "In Progress",
     "priority": "High",
     "createdDate": "2023-09-17",
-    "dueDate": "2023-09-25"
+    "dueDate": "2023-09-25",
+    "category": "Mobile"
   },
   {
     "id": "4",
@@ -37,7 +40,8 @@
     "status": "To Do",
     "priority": "High",
     "createdDate": "2023-09-18",
-    "dueDate": "2023-10-05"
+    "dueDate": "2023-10-05",
+    "category": "Product"
   },
   {
     "id": "5",
@@ -47,6 +51,7 @@
     "status": "Done",
     "priority": "Low",
     "createdDate": "2023-09-19",
-    "dueDate": "2023-09-30"
+    "dueDate": "2023-09-30",
+    "category": "Desktop"
   }
 ]

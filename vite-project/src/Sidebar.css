@@ -11,66 +11,55 @@
     font-family: Arial, sans-serif;
   }
   
-  .sidebar-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1.2em;
-    color: #aab6c1;
-    margin-bottom: 20px;
-  }
-  
-  .integrations-icon {
-    width: 20px;
-    height: 20px;
-    background-color: #ccc;
-    border-radius: 50%;
-  }
-  
+  /* Members Section */
   .sidebar-section {
-    margin-bottom: 20px;
+    margin-top: 5px;
+    margin-bottom: 2px;
   }
   
   .sidebar-section h3 {
     font-size: 1em;
     font-weight: 600;
     color: #aab6c1;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    margin-top: 80px;
   }
   
+  /* Members List Styling */
   .members-list {
     display: flex;
     align-items: center;
     gap: 8px;
+    margin-top: 20px;
   }
   
+  /* Member Avatar Styling */
   .member-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
   }
   
+  /* Invite Button Styling */
   .invite-button {
     font-size: 0.9em;
     color: #4fc3f7;
     background: none;
     border: none;
     cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
   }
   
-  .board-toggle, .calendar-toggle {
+  /* Connected Boards Toggle */
+  .board-toggle {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
+    margin-top: 10px;
   }
   
-  .board-toggle input, .calendar-toggle input {
+  .board-toggle input {
     margin-right: 8px;
-  }
-  
-  .calendar-item {
-    font-size: 0.9em;
-    color: #ffffff;
-    margin-bottom: 10px;
   }
   
