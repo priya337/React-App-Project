@@ -1,17 +1,10 @@
 // App.jsx
-<<<<<<< HEAD
 import React from "react";
-import KanbanBoard from "./Sidebar";
-import "./App.css";
-import Navbar from "./components/Navbar.jsx";
-=======
-import React from 'react';
 // import KanbanBoard from './Sidebar';
-import './App.css';
-import Sidebar from './Sidebar.jsx'
-import Footer from './Footer.jsx'
-import Navbar from './components/Navbar.jsx';
->>>>>>> 9b68c7a369cd74dc9ce650ae96feb96a8d69bee6
+import "./App.css";
+import Sidebar from "./Sidebar.jsx";
+import Footer from "./Footer.jsx";
+import Navbar from "./components/Navbar.jsx";
 
 const App = () => {
   return (
