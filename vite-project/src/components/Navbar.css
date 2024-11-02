@@ -1,0 +1,34 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  background-color: #440e81;
+  padding: 10px;
+}
+
+.navbar-logo {
+  display: flex;
+  align-items: center;
+}
+.navbar-logo img {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.navbar-title {
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+}
+.navbar-menu {
+  display: flex;
+  align-items: left;
+  height: 40px;
+}
+.menu-button {
+  background-color: #444;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-left: auto;
+}

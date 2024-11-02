@@ -5,12 +5,14 @@ import "./App.css";
 import Sidebar from "./Sidebar.jsx";
 import Footer from "./Footer.jsx";
 import Navbar from "./components/Navbar.jsx";
+import Kanban from "./Kanban.jsx";
 
 const App = () => {
   return (
     <div className="app-container">
       <Sidebar />
       <Navbar />
+      <Kanban />
       <Footer />
       {/* Other main content here */}
       {/* <div className="main-content"> */}
