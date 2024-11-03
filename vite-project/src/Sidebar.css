@@ -1,65 +1,84 @@
 /* Sidebar.css */
 
 .sidebar {
-    width: 280px;
-    background-color: #2d3a4b;
-    color: #ffffff;
-    padding: 20px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    font-family: Arial, sans-serif;
-  }
-  
-  /* Members Section */
-  .sidebar-section {
-    margin-top: 5px;
-    margin-bottom: 2px;
-  }
-  
-  .sidebar-section h3 {
-    font-size: 1em;
-    font-weight: 600;
-    color: #aab6c1;
-    margin-bottom: 15px;
-    margin-top: 80px;
-  }
-  
-  /* Members List Styling */
-  .members-list {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-  
-  /* Member Avatar Styling */
-  .member-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-  
-  /* Invite Button Styling */
-  .invite-button {
-    font-size: 0.9em;
-    color: #4fc3f7;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    margin-left: 10px;
-  }
-  
-  /* Connected Boards Toggle */
-  .board-toggle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-    margin-top: 10px;
-  }
-  
-  .board-toggle input {
-    margin-right: 8px;
-  }
-  
+  width: 280px;
+  background-color: #2d3a4b;
+  color: #ffffff;
+  padding: 20px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+}
+
+/* Members Section */
+.sidebar-section {
+  margin-top: 5px;
+  margin-bottom: 2px;
+}
+
+.sidebar-section h3 {
+  font-size: 1em;
+  font-weight: 600;
+  color: #aab6c1;
+  margin-bottom: 15px;
+  margin-top: 80px;
+}
+
+/* Members List Styling */
+.members-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+/* Member Avatar Styling */
+.member-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+/* Invite Button Styling */
+.invite-button {
+  font-size: 0.9em;
+  color: #4fc3f7;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin-left: 10px;
+}
+
+/* Connected Boards Toggle */
+.board-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+  margin-top: 10px;
+}
+
+.board-toggle input {
+  margin-right: 8px;
+}
+.links {
+  list-style-type: none;
+  padding: 0;
+  margin: 40px 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.links li a {
+  color: white;
+  text-decoration: none;
+}
+.links li a:hover {
+  color: #f0c040;
+}
+.active-link {
+  color: blue !important;
+  font-weight: bold;
+  text-decoration: underline !important;
+}
