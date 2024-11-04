@@ -6,6 +6,14 @@ import { NavLink } from "react-router-dom";
 const Sidebar = ({ filters, onFilterChange }) => {
   return (
     <div className="sidebar">
+      {/* Back to Home Link */}
+      <div className="back-to-home">
+        <NavLink to="/" className="home-link">
+          &larr; Back to Home
+        </NavLink>
+      </div>
+      
+      {/* Members Section */}
       <div className="sidebar-section">
         <h3>Members</h3>
         <div className="members-list">
@@ -27,42 +35,8 @@ const Sidebar = ({ filters, onFilterChange }) => {
           <button className="invite-button">+Invite</button>
         </div>
       </div>
-      <div className="sidebar-links">
-        <ul className="links">
-          <li>
-            <NavLink
-              to="/"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/about"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              About
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              Dashboard
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/details"
-              className={({ isActive }) => (isActive ? "active-link" : "")}
-            >
-              Details
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+
+      {/* Connected Boards Section */}
       <div className="sidebar-section">
         <h3>Connected boards</h3>
         <div className="board-toggle">
@@ -89,6 +63,10 @@ const Sidebar = ({ filters, onFilterChange }) => {
           />
           <label>Mobile</label>
         </div>
+      {/* Create Task Button */}
+      <div className="create-task-container">
+        <button className="create-task-button">Create Task</button>
+      </div>
       </div>
     </div>
   );

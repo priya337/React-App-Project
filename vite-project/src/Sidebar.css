@@ -1,84 +1,115 @@
-/* Sidebar.css */
-
+/* Sidebar Container */
 .sidebar {
-  width: 280px;
-  background-color: #2d3a4b;
-  color: #ffffff;
-  padding: 20px;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  font-family: Arial, sans-serif;
-}
+    width: 280px;
+    background-color: #2d3a4b;
+    color: #ffffff;
+    padding: 20px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    box-sizing: border-box;
+  }
+  
+  /* Back to Home Link Styling */
+  .back-to-home {
+    margin-bottom: 20px;
+    margin-top: 80px;
+    margin-right: 100px;
+  }
+  
+  .home-link {
+    color: #4fc3f7;
+    text-decoration: none;
+    font-size: 1em;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .home-link:hover {
+    color: #f0c040;
+  }
+  
+  /* Members Section */
+  .sidebar-section {
+    margin-top: 5px;
+    margin-bottom: 2px;
+  }
+  
+  .sidebar-section h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: #aab6c1;
+    margin-bottom: 15px;
+    margin-top: 80px;
+  }
+  
+  /* Members List Styling */
+  .members-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+  
+  /* Member Avatar Styling */
+  .member-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+  }
+  
+  /* Invite Button Styling */
+  .invite-button {
+    font-size: 0.9em;
+    color: #4fc3f7;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 10px;
+  }
+  
+  /* Connected Boards Toggle */
+  .board-toggle {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    margin-top: 10px;
+  }
+  
+  .board-toggle input {
+    margin-right: 8px;
+  }
+  
+  /* Remove unused links styling */
+  .links {
+    display: none; /* Hide the links section */
+  }
 
-/* Members Section */
-.sidebar-section {
-  margin-top: 5px;
-  margin-bottom: 2px;
-}
-
-.sidebar-section h3 {
-  font-size: 1em;
-  font-weight: 600;
-  color: #aab6c1;
-  margin-bottom: 15px;
-  margin-top: 80px;
-}
-
-/* Members List Styling */
-.members-list {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 20px;
-}
-
-/* Member Avatar Styling */
-.member-avatar {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-
-/* Invite Button Styling */
-.invite-button {
-  font-size: 0.9em;
-  color: #4fc3f7;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  margin-left: 10px;
-}
-
-/* Connected Boards Toggle */
-.board-toggle {
-  display: flex;
-  align-items: center;
-  margin-bottom: 8px;
-  margin-top: 10px;
-}
-
-.board-toggle input {
-  margin-right: 8px;
-}
-.links {
-  list-style-type: none;
-  padding: 0;
-  margin: 40px 0px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.links li a {
-  color: white;
-  text-decoration: none;
-}
-.links li a:hover {
-  color: #f0c040;
-}
-.active-link {
-  color: blue !important;
-  font-weight: bold;
-  text-decoration: underline !important;
-}
+  /* Style for the Create Task button container */
+.create-task-container {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  /* Style for the Create Task button */
+  .create-task-button {
+    background-color: #4fc3f7;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-right: 110px;
+  }
+  
+  .create-task-button:hover {
+    background-color: #3aa6d6;
+  }
+  
