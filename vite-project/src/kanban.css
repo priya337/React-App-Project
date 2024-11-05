@@ -1,0 +1,116 @@
+/* Main layout container for the Kanban dashboard */
+.dashboard-container {
+    display: flex;
+    height: 100vh; /* Fill the viewport height */
+    gap: 20px;
+    overflow: hidden;
+}
+
+/* Sidebar styling - Matches the style in Sidebar.css */
+.sidebar {
+    width: 280px;
+    background-color: #2d3a4b;
+    color: #ffffff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+/* Kanban board area */
+.kanban-board {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    gap: 20px;
+    overflow-y: auto;
+    max-width: 1000px;
+}
+
+/* Kanban column styles */
+.kanban-column {
+    flex: 1;
+    min-width: 220px;
+    max-width: 280px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Remove default list styles */
+.kanban-task-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Task card styling */
+.kanban-item {
+    position: relative;
+    background-color: #e0e7ff;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 12px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    font-size: 0.9em;
+    color: #333;
+    transition: transform 0.2s;
+}
+
+.kanban-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Delete button styling */
+.delete-button {
+    position: absolute;
+    top: 5px; /* Smaller padding for a neater look */
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 0.8em; /* Smaller font size */
+    color:black;
+    cursor: pointer;
+    padding: 0;
+}
+
+.delete-button:hover {
+    color: #787af3;
+}
+
+/* Task title */
+.kanban-item h3 {
+    font-size: 1em;
+    font-weight: 600;
+    color: #2d3a4b;
+    margin-bottom: 8px;
+}
+
+/* Task details */
+.kanban-item p {
+    font-size: 0.85em;
+    color: #555;
+    margin: 4px 0;
+    line-height: 1.4;
+}
+
+/* Strong emphasis for labels */
+.kanban-item p strong {
+    color: #2d3a4b;
+    font-weight: 600;
+}
+
+/* Placeholder text for empty columns */
+.no-tasks-placeholder {
+    color: #888;
+    font-style: italic;
+    font-size: 0.9em;
+    margin-top: 20px;
+    text-align: center;
+}

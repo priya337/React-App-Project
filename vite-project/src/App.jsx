@@ -1,10 +1,14 @@
 // App.jsx
 import React, { useState } from "react";
-import "./App.css";
-import Sidebar from "./Sidebar.jsx";
-import Footer from "./Footer.jsx";
-import Navbar from "./components/Navbar.jsx";
+import { Routes, Route } from "react-router-dom";
+
 import Kanban from "./Kanban.jsx";
+import Navbar from "./components/Navbar.jsx";
+// import Sidebar from "./Sidebar"; // Import Sidebar here
+import Homepage from "./Homepage.jsx";
+import About from "./About.jsx";
+import "./App.css";
+import Footer from "./Footer.jsx";
 
 const App = () => {
   // Define filters state here to share it between Sidebar and Kanban
@@ -24,13 +28,20 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <Sidebar filters={filters} onFilterChange={handleFilterChange} />
-      {<Navbar />}
-      <div className="main-content">
-        <div className="kanban-container">
-          <Kanban filters={filters} />
-        </div>
-      </div>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/about" element={<About />} />
+        <Route
+          path="/dashboard"
+          element={
+            <div className="dashboard-container">
+              {/* <Sidebar filters={filters} onFilterChange={handleFilterChange} /> */}
+              <Kanban filters={filters} />
+            </div>
+          }
+        />
+      </Routes>
       <Footer />
     </div>
   );

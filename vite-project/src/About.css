@@ -1,0 +1,27 @@
+/* About container styling */
+.about-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  margin-top: 50px; /* Adjust to match .navbar height */
+  text-align: center;
+  min-height: calc(100vh - 50px); /* Adjust to fit the viewport below navbar */
+  box-sizing: border-box;
+}
+
+
+/* Ensure h1 is centered and visible */
+.about-container h1 {
+  font-size: 2em;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Styling for the list items */
+.about-list-items {
+  list-style-type: none;
+  padding: 0;
+  margin-top: 10px;
+}
