@@ -24,3 +24,25 @@
   padding: 20px;
   box-sizing: border-box;
 }
+nav {
+  background-color: blueviolet;
+  height: 10vh;
+  display: flex;
+}
+.active {
+  display: flex;
+  color: rgb(124, 11, 11);
+  text-decoration: underline;
+  justify-content: space-between;
+  font-size: 1.5rem;
+  background-color: rgb(32, 4, 95);
+  margin-top: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+.notFound {
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+}

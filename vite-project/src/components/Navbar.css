@@ -27,3 +27,8 @@
   font-size: 24px;
   font-weight: bold;
 }
+a {
+  color: aqua;
+  text-decoration: none;
+  margin: 0 10px 0 10px;
+}
