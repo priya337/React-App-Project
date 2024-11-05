@@ -9,6 +9,7 @@ import Homepage from "./Homepage.jsx";
 import About from "./About.jsx";
 import "./App.css";
 import Footer from "./Footer.jsx";
+import { NotFound } from "./components/NotFound.jsx";
 
 const App = () => {
   // Define filters state here to share it between Sidebar and Kanban
@@ -32,6 +33,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Homepage />} />
         <Route path="/about" element={<About />} />
+        <Route path="*" element={<NotFound />} />
         <Route
           path="/dashboard"
           element={
