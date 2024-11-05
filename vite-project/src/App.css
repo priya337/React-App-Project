@@ -5,7 +5,6 @@
   overflow: hidden; /* Prevent page-level scrolling */
 }
 
-
 /* Main content area */
 .main-content {
   flex-grow: 1;

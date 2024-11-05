@@ -2,26 +2,50 @@
 .about-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 20px;
   margin-top: 50px; /* Adjust to match .navbar height */
   text-align: center;
   min-height: calc(100vh - 50px); /* Adjust to fit the viewport below navbar */
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
 }
-
 
 /* Ensure h1 is centered and visible */
 .about-container h1 {
-  font-size: 2em;
-  color: #333;
-  margin-bottom: 20px;
+  font-size: 5em;
+  color: darkblue;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+  top: 50px;
 }
 
 /* Styling for the list items */
 .about-list-items {
+  display: flex;
+  justify-content: space-between;
   list-style-type: none;
+  width: 100%;
   padding: 0;
-  margin-top: 10px;
+  margin: 10px 0;
+  gap: 20px;
+}
+.about-list-items li {
+  flex: 1;
+  text-align: center;
+  font-size: 2em;
+  color: darkblue;
+  font-weight: 600;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+}
+.profile-image {
+  width: 30%;
+  border: 2px solid rgb(126, 126, 214);
+  border-radius: 50%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.7);
+}
+.app-container {
+  background-image: url("../public/homepage-background.png");
+  background-size: cover;
 }
