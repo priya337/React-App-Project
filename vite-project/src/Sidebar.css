@@ -1,66 +1,37 @@
-/* Sidebar Container */
 .sidebar {
     width: 280px;
     background-color: #2d3a4b;
     color: #ffffff;
     padding: 20px;
-    height: 100vh;
     display: flex;
     flex-direction: column;
-    font-family: Arial, sans-serif;
+    height: 100vh;
     box-sizing: border-box;
   }
   
-  /* Back to Home Link Styling */
-  .back-to-home {
+  /* Back link styling */
+  .back-link {
     margin-bottom: 20px;
-    margin-top: 80px;
-    margin-right: 100px;
-  }
-  
-  .home-link {
-    color: #4fc3f7;
-    text-decoration: none;
-    font-size: 1em;
-    font-weight: bold;
-    display: block;
-    margin-bottom: 10px;
-  }
-  
-  .home-link:hover {
-    color: #f0c040;
+    margin-top: 100px;
   }
   
   /* Members Section */
-  .sidebar-section {
-    margin-top: 5px;
-    margin-bottom: 2px;
+  .members-section {
+    margin-bottom: 20px;
   }
   
-  .sidebar-section h3 {
-    font-size: 1em;
-    font-weight: 600;
-    color: #aab6c1;
-    margin-bottom: 15px;
-    margin-top: 80px;
-  }
-  
-  /* Members List Styling */
   .members-list {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: 20px;
   }
   
-  /* Member Avatar Styling */
   .member-avatar {
     width: 32px;
     height: 32px;
     border-radius: 50%;
   }
   
-  /* Invite Button Styling */
   .invite-button {
     font-size: 0.9em;
     color: #4fc3f7;
@@ -68,48 +39,40 @@
     border: none;
     cursor: pointer;
     padding: 0;
-    margin-left: 10px;
   }
   
-  /* Connected Boards Toggle */
+  /* Connected Boards Section */
+  .sidebar-section {
+    margin-bottom: 20px;
+  }
+  
   .board-toggle {
     display: flex;
     align-items: center;
     margin-bottom: 8px;
-    margin-top: 10px;
   }
   
-  .board-toggle input {
-    margin-right: 8px;
+  .board-toggle label {
+    margin-left: 8px;
   }
   
-  /* Remove unused links styling */
-  .links {
-    display: none; /* Hide the links section */
-  }
-
-  /* Style for the Create Task button container */
-.create-task-container {
+  /* Create Task Button Styling */
+  .create-task-container {
     margin-top: 20px;
-    display: flex;
-    justify-content: center;
   }
   
-  /* Style for the Create Task button */
   .create-task-button {
+    display: block;
+    text-align: center;
+    padding: 10px 15px;
     background-color: #4fc3f7;
     color: #ffffff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    text-decoration: none;
     font-size: 1em;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-right: 110px;
   }
   
   .create-task-button:hover {
-    background-color: #3aa6d6;
+    background-color: #3a9bd6;
   }
   
