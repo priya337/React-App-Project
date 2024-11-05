@@ -12,7 +12,7 @@ function About() {
       <div className="dashboard-container">
         <Sidebar />{" "}
         {/* No filters prop passed, so only "Back to Home" will render */}
-        <div className="main-content">
+        <div className="about-main-content">
           <div className="about-container">
             <h1>Meet the team!</h1>
             <ul className="about-list-items">
