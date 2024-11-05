@@ -26,7 +26,7 @@
 }
 nav {
   background-color: blueviolet;
-  height: 10vh;
+  height: 20vh;
   display: flex;
 }
 .active {

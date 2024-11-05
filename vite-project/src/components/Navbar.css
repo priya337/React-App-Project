@@ -3,6 +3,7 @@
   top: 0; /* Ensures the navbar is fixed at the top of the viewport */
   left: 0;
   width: 100%;
+  height: 10vh;
   background-color: #aab6c1;
   color: white;
   display: flex;
