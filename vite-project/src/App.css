@@ -43,6 +43,6 @@ nav {
 .notFound {
   background-size: cover;
   background-position: center;
-  height: 100%;
+  height: 100hv;
   width: 100%;
 }
