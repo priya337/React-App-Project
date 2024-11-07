@@ -1,78 +1,141 @@
 .sidebar {
-    width: 280px;
-    background-color: #2d3a4b;
-    color: #ffffff;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    box-sizing: border-box;
-  }
-  
-  /* Back link styling */
-  .back-link {
-    margin-bottom: 20px;
-    margin-top: 100px;
-  }
-  
-  /* Members Section */
-  .members-section {
-    margin-bottom: 20px;
-  }
-  
-  .members-list {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  
-  .member-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-  }
-  
-  .invite-button {
-    font-size: 0.9em;
-    color: #4fc3f7;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-  }
-  
-  /* Connected Boards Section */
-  .sidebar-section {
-    margin-bottom: 20px;
-  }
-  
-  .board-toggle {
-    display: flex;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  
-  .board-toggle label {
-    margin-left: 8px;
-  }
-  
-  /* Create Task Button Styling */
-  .create-task-container {
-    margin-top: 20px;
-  }
-  
-  .create-task-button {
-    display: block;
-    text-align: center;
-    padding: 10px 15px;
-    background-color: #4fc3f7;
-    color: #ffffff;
-    border-radius: 8px;
-    text-decoration: none;
-    font-size: 1em;
-  }
-  
-  .create-task-button:hover {
-    background-color: #3a9bd6;
-  }
-  
+  width: 280px;
+  background-color: #2d3a4b;
+  color: #ffffff;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+/* Back link styling */
+.back-link {
+  margin-bottom: 20px;
+  margin-top: 100px;
+}
+
+/* Members Section */
+.members-section {
+  margin-bottom: 20px;
+}
+
+.members-list {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.member-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+}
+
+.invite-button {
+  font-size: 0.9em;
+  color: #4fc3f7;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+/* Connected Boards Section */
+.sidebar-section {
+  margin-bottom: 20px;
+}
+
+.board-toggle {
+  display: flex;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.board-toggle label {
+  margin-left: 8px;
+}
+
+/* Create Task Button Styling */
+/* .create-task-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+} */
+
+.create-task-button {
+  display: block;
+  text-align: center;
+  padding: 10px 20px;
+  background-color: #8a2be2; /* Blueviolet */
+  color: whitesmoke; 
+  border-radius: 20px; /* Slight rounding */
+  text-decoration: none;
+  font-size: 1em;
+  font-weight: bold;
+  cursor: pointer;
+  /* transition: background-color 0.3s ease; */
+  /* border: none; */
+  width: 100%;
+  max-width: 100px;
+}
+
+.reset-button {
+  background-color: blue;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 200px;
+  margin-left: 10px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+/* Style for the To TaskDetails Page button */
+/* .to-task-details-container {
+margin-top: 10px;
+text-align: center;
+} */
+
+.to-task-details-button {
+display: block;
+text-align: center;
+padding: 10px 20px;
+background-color: #8a2be2; /* Blueviolet */
+color: whitesmoke; 
+border-radius: 20px; /* Slight rounding */
+text-decoration: none;
+font-size: 1em;
+font-weight: bold;
+cursor: pointer;
+/* transition: background-color 0.3s ease; */
+/* border: none; */
+width: 150%;
+max-width: 200px;
+margin-top: 20px;
+}
+
+/* .to-task-details-button:hover {
+background-color: #3a8ccb;
+} */
+
+
+/* Sidebar Reset Button Styling
+.reset-container {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+} */
+
+/* .reset-button:hover {
+  background-color: #c9302c;
+} */
+ 
+/* .create-task-button:hover {
+  background-color: #3a9bd6; /* Hover effect */
+/* }
+
