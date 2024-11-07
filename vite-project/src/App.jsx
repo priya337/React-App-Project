@@ -1,25 +1,49 @@
 // App.jsx
-import React, { useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import KanbanListData from "../kanban.json";
-import Kanban from "./Kanban.jsx";
-import Navbar from "./components/Navbar.jsx";
-import Homepage from "./Homepage.jsx";
-import About from "./About.jsx";
-import CreateTask from "./CreateTask";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import Kanban from "./Kanban";
+import TaskDetails from "./TaskDetails";
+import Navbar from "./components/Navbar";
+import Footer from "./Footer";
 import Sidebar from "./Sidebar";
-import TaskDetails from "./TaskDetails"; // Import TaskDetails component
+import Homepage from "./Homepage";
+import About from "./About";
+import CreateTask from "./CreateTask";
 import "./App.css";
-import Footer from "./Footer.jsx";
+import KanbanListData from "../kanban.json"; // Ensure this path is correct
 import { NotFound } from "./components/NotFound.jsx";
 
 const App = () => {
-  const [kanbanList, setKanbanList] = useState(KanbanListData);
+  const navigate = useNavigate();
+
+  const originalTaskIds = KanbanListData.map(task => task.id); // IDs of original tasks from JSON
+
+  const getInitialKanbanList = () => {
+    const savedTasks = localStorage.getItem("kanbanList");
+    return savedTasks ? JSON.parse(savedTasks) : KanbanListData;
+  };
+
+  const [kanbanList, setKanbanList] = useState(getInitialKanbanList);
   const [filters, setFilters] = useState({
     Product: true,
     Desktop: true,
     Mobile: true,
   });
+
+  useEffect(() => {
+    localStorage.setItem("kanbanList", JSON.stringify(kanbanList));
+  }, [kanbanList]);
+
+  const handleAddTask = (newTask) => {
+    setKanbanList((prevList) => [...prevList, { ...newTask, id: Date.now() }]);
+    navigate("/dashboard");
+  };
+
+  const handleDeleteTask = (taskId) => {
+    setKanbanList((prevList) => prevList.filter((task) => task.id !== taskId));
+  };
 
   const handleFilterChange = (category) => {
     setFilters((prevFilters) => ({
@@ -28,61 +52,99 @@ const App = () => {
     }));
   };
 
-  const handleAddTask = (newTask) => {
-    setKanbanList((prevList) => [...prevList, newTask]);
+  const handleReset = () => {
+    // Filter out any tasks that are not in the original set of IDs
+    const resetList = kanbanList.filter(task => !originalTaskIds.includes(task.id));
+  
+    // Update state and local storage to keep only new tasks, while restoring original tasks
+    const updatedList = [...resetList, ...KanbanListData];
+    setKanbanList(updatedList);
+    localStorage.setItem("kanbanList", JSON.stringify(updatedList));
+  
+    // Reset filters as before
+    setFilters({ Product: true, Desktop: true, Mobile: true });
+    localStorage.setItem("filters", JSON.stringify({ Product: true, Desktop: true, Mobile: true }));
   };
-
-  const handleDeleteTask = (id) => {
-    setKanbanList((prevList) => prevList.filter((task) => task.id !== id));
-  };
-
+  
   return (
-    <div className="app-container">
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<About />} />
-        <Route path="*" element={<NotFound />} />
-        <Route
-          path="/dashboard"
-          element={
-            <div className="dashboard-container">
-              <Sidebar
-                filters={filters}
-                onFilterChange={handleFilterChange}
-                showCreateTaskButton={true}
-              />
-              <Kanban
-                filters={filters}
-                kanbanList={kanbanList}
-                setKanbanList={setKanbanList}
-                onDeleteTask={handleDeleteTask}
-              />
-            </div>
-          }
-        />
-        <Route
-          path="/create-task"
-          element={
-            <div className="page-layout">
-              <Sidebar showBackToDashboard={true} />
-              <CreateTask onAddTask={handleAddTask} />
-            </div>
-          }
-        />
-        <Route
-          path="/task-details"
-          element={
-            <TaskDetails
-              kanbanList={kanbanList}
-              filters={filters}
-              onFilterChange={handleFilterChange}
-            />
-          }
-        />
-      </Routes>
-      <Footer />
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div className="app-container">
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="*" element={<NotFound />} />
+
+          <Route
+            path="/dashboard"
+            element={
+              <div className="dashboard-container">
+                <Sidebar
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                  showCreateTaskButton={true}
+                  showTaskDetailsLink={true}
+                  showResetButton={true}
+                  onReset={handleReset}
+                />
+                <Kanban
+                  kanbanList={kanbanList}
+                  filters={filters}
+                  onDeleteTask={handleDeleteTask}
+                  onUpdateTaskStatus={(taskId, newStatus) => {
+                    setKanbanList((prevList) =>
+                      prevList.map((task) =>
+                        task.id === taskId ? { ...task, status: newStatus } : task
+                      )
+                    );
+                  }}
+                />
+              </div>
+            }
+          />
+
+          <Route
+            path="/task-details"
+            element={
+              <div className="task-details-container">
+                <Sidebar
+                  filters={filters}
+                  onFilterChange={handleFilterChange}
+                  showBackToDashboard={true}
+                  showResetButton={true}
+                  onReset={handleReset}
+                />
+                <TaskDetails
+                  kanbanList={kanbanList}
+                  filters={filters}
+                  onDeleteTask={handleDeleteTask}
+                />
+              </div>
+            }
+          />
+
+          <Route
+            path="/task-details/:taskTitle"
+            element={
+              <div className="task-details-container">
+                <Sidebar showBackToDashboard={true} showResetButton={false} />
+                <TaskDetails
+                  kanbanList={kanbanList}
+                  onDeleteTask={handleDeleteTask}
+                  singleTaskView={true}
+                />
+              </div>
+            }
+          />
+
+          <Route
+            path="/create-task"
+            element={<CreateTask onAddTask={handleAddTask} />}
+          />
+        </Routes>
+        <Footer />
+      </div>
+    </DndProvider>
   );
 };
 

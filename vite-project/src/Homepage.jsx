@@ -7,7 +7,7 @@ function Homepage() {
   return (
     <div className="container">
       <img src={logo} alt="logo" className="logo-ironhack" />
-      <h1>Welcome to Ironhack Kanban Board!</h1>
+      <h2>Welcome to Ironhack Kanban Board!</h2>
       <p>
         Try our popular framework used to implement Agile and DevOps software
         development.

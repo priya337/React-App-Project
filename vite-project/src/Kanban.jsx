@@ -1,66 +1,90 @@
 // Kanban.jsx
-import React, { useState } from "react";
-import KanbanListData from "../kanban.json";
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useDrag, useDrop } from "react-dnd";
 import "./kanban.css";
+import { createSlug } from "./utils/utils";
 
-function Kanban({ filters, kanbanList, setKanbanList }) {
-  // Filter tasks based on both status and active filters
+function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus }) {
+  const navigate = useNavigate();
+
   const filterTasks = (status) =>
-    kanbanList.filter(
-      (task) => task.status === status && filters[task.category]
-    );
+    kanbanList.filter((task) => task.status === status && filters[task.category]);
 
-  // Delete task function with automatic uncheck logic
-  const deleteTask = (id) => {
-    setKanbanList((prevList) => {
-      const updatedList = prevList.filter((task) => task.id !== id);
-
-      // Check if any category now has no tasks left, and uncheck its filter if so
-      const categories = ["Product", "Desktop", "Mobile"];
-      const updatedFilters = { ...filters };
-
-      categories.forEach((category) => {
-        if (!updatedList.some((task) => task.category === category)) {
-          updatedFilters[category] = false;
-        }
-      });
-
-      return updatedList;
-    });
-  };
+    const handleCardClick = (task) => {
+      const slug = createSlug(task.title);
+      navigate(`/task-details/${slug}`, { state: { task } });
+    };
+    
 
   return (
     <div className="kanban-board">
-      {["To Do", "In Progress", "Done"].map((status) => {
-        const filteredTasks = filterTasks(status);
-        return (
-          <div key={status} className="kanban-column">
-            <h2>{status}</h2>
-            <ul className="kanban-task-list">
-              {filteredTasks.length > 0 ? (
-                filteredTasks.map((task) => (
-                  <li key={task.id} className="kanban-item">
-                    <button
-                      className="delete-button"
-                      onClick={() => deleteTask(task.id)}
-                    >
-                      ✖
-                    </button>
-                    <h3>{task.title}</h3>
-                    <p><strong>Assignee:</strong> {task.assignee}</p>
-                    <p><strong>Status:</strong> {task.status} {task.status === "Done" ? "✅" : ""}</p>
-                    <p><strong>Priority:</strong> {task.priority}</p>
-                    <p><strong>Due:</strong> {task.dueDate}</p>
-                  </li>
-                ))
-              ) : (
-                <p className="no-tasks-placeholder">No tasks available</p>
-              )}
-            </ul>
-          </div>
-        );
-      })}
+      {["Backlog", "To Do", "In Progress", "Done"].map((status) => (
+        <Column
+          key={status}
+          status={status}
+          tasks={filterTasks(status)}
+          onDrop={(taskId) => onUpdateTaskStatus(taskId, status)}
+        >
+          {filterTasks(status).map((task) => (
+            <Card
+              key={task.id}
+              task={task}
+              onClick={() => handleCardClick(task)}
+              onDelete={onDeleteTask}
+            />
+          ))}
+        </Column>
+      ))}
     </div>
+  );
+}
+
+function Column({ status, children, onDrop }) {
+  const [, drop] = useDrop({
+    accept: "CARD",
+    drop: (item) => onDrop(item.id),
+  });
+
+  return (
+    <div ref={drop} className="kanban-column">
+      <h2>{status}</h2>
+      <ul className="kanban-task-list">{children}</ul>
+    </div>
+  );
+}
+
+function Card({ task, onClick, onDelete }) {
+  const [{ isDragging }, drag] = useDrag({
+    type: "CARD",
+    item: { id: task.id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  return (
+    <li
+      ref={drag}
+      className="kanban-item"
+      onClick={onClick}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      <button
+        className="delete-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(task.id);
+        }}
+      >
+        ✖
+      </button>
+      <h3>{task.title}</h3>
+      <p><strong>Assignee:</strong> {task.assignee}</p>
+      <p><strong>Status:</strong> {task.status}</p>
+      <p><strong>Priority:</strong> {task.priority}</p>
+      <p><strong>Due Date:</strong> {task.dueDate}</p>
+    </li>
   );
 }
 
