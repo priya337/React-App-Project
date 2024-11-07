@@ -101,8 +101,8 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
                     onChange={handleInputChange}
                     placeholder="Description"
                   />
-                  <button onClick={handleSave}>Save</button>
-                  <button onClick={() => setEditingTaskId(null)}>Cancel</button>
+                  <button onClick={handleSave} className="save-button">Save</button>
+                  <button onClick={() => setEditingTaskId(null)} className="cancel-button">Cancel</button>
                 </div>
               ) : (
                 <div>
@@ -113,7 +113,7 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
                   <p><strong>Due Date:</strong> {task.dueDate}</p>
                   <p><strong>Category:</strong> {task.category}</p>
                   <p><strong>Description:</strong> {task.description}</p>
-                  <button onClick={() => handleEditClick(task)}>Edit</button>
+                  <button onClick={() => handleEditClick(task)} className="edit-button">Edit</button>
                 </div>
               )}
             </div>

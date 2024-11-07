@@ -142,3 +142,65 @@
     margin-right: -10px; /* Optional: Adjusts the container to push the scrollbar closer to the right edge */
 }
 
+/* Description field styling */
+.task-details-content textarea {
+    width: 90%; /* Full width */
+    height: 150px; /* Larger height for better visibility */
+    padding: 10px;
+    font-size: 1em;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    resize: vertical; /* Allows resizing vertically only */
+    margin-top: 10px; /* Add space above the field */
+  }
+  
+  /* Save button styling */
+  .task-details-content .save-button {
+    background-color: blueviolet;
+    color: whitesmoke;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-right: 10px;
+  }
+  
+  /* .task-details-content .save-button:hover {
+    background-color:blueviolet;
+  } */
+
+    /* Save button styling */
+    .task-details-content .cancel-button {
+        background-color: blueviolet;
+        color: whitesmoke;
+        padding: 10px 20px;
+        font-size: 1em;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+      
+      /* .task-details-content .cancel-button:hover {
+        background-color:greenyellow;
+      } */
+
+          /* Save button styling */
+    .task-details-content .edit-button {
+        background-color: blueviolet;
+        color: whitesmoke;
+        padding: 10px 20px;
+        font-size: 1em;
+        font-weight: bold;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 15px;
+        margin-right: 10px;
+      }
+

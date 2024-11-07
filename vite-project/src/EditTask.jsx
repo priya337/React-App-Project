@@ -1,6 +1,7 @@
 // EditTask.jsx
 import React, { useState, useEffect } from "react";
 import { useParams, useLocation, useNavigate } from "react-router-dom";
+import "./EditTask.css"; // Assuming you have a CSS file for EditTask-specific styles
 
 const EditTask = ({ onSave }) => {
   const { taskId } = useParams(); // Retrieve task ID from the route parameter
@@ -29,6 +30,7 @@ const EditTask = ({ onSave }) => {
   const [dueDate, setDueDate] = useState(task?.dueDate || "");
   const [description, setDescription] = useState(task?.description || "");
 
+  // Update form fields if task data changes
   useEffect(() => {
     if (task) {
       setTitle(task.title);
@@ -64,44 +66,71 @@ const EditTask = ({ onSave }) => {
   return (
     <div className="edit-task-container">
       <h2>Edit Task</h2>
-      <label>
-        Title:
-        <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} />
-      </label>
-      <label>
-        Category:
-        <input type="text" value={category} onChange={(e) => setCategory(e.target.value)} />
-      </label>
-      <label>
-        Assignee:
-        <input type="text" value={assignee} onChange={(e) => setAssignee(e.target.value)} />
-      </label>
-      <label>
-        Status:
-        <select value={status} onChange={(e) => setStatus(e.target.value)}>
-          <option value="To Do">To Do</option>
-          <option value="In Progress">In Progress</option>
-          <option value="Done">Done</option>
-          <option value="Backlog">Backlog</option>
-        </select>
-      </label>
-      <label>
-        Priority:
-        <select value={priority} onChange={(e) => setPriority(e.target.value)}>
-          <option value="Low">Low</option>
-          <option value="Medium">Medium</option>
-          <option value="High">High</option>
-        </select>
-      </label>
-      <label>
-        Due Date:
-        <input type="date" value={dueDate} onChange={(e) => setDueDate(e.target.value)} />
-      </label>
-      <label>
-        Description:
-        <textarea value={description} onChange={(e) => setDescription(e.target.value)} />
-      </label>
-      <button onClick={handleSave}>Save Task</button>
+      <div className="edit-task-form">
+        <label>
+          Title:
+          <input
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+          />
+        </label>
+        <label>
+          Category:
+          <input
+            type="text"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+          />
+        </label>
+        <label>
+          Assignee:
+          <input
+            type="text"
+            value={assignee}
+            onChange={(e) => setAssignee(e.target.value)}
+          />
+        </label>
+        <label>
+          Status:
+          <select
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
+          >
+            <option value="To Do">To Do</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Done">Done</option>
+            <option value="Backlog">Backlog</option>
+          </select>
+        </label>
+        <label>
+          Priority:
+          <select
+            value={priority}
+            onChange={(e) => setPriority(e.target.value)}
+          >
+            <option value="Low">Low</option>
+            <option value="Medium">Medium</option>
+            <option value="High">High</option>
+          </select>
+        </label>
+        <label>
+          Due Date:
+          <input
+            type="date"
+            value={dueDate}
+            onChange={(e) => setDueDate(e.target.value)}
+          />
+        </label>
+        <label>
+          Description:
+          <textarea
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+          />
+        </label>
+        <button onClick={handleSave} className="save-button">Save</button>
+      </div>
     </div>
   );
 };
