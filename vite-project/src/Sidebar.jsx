@@ -29,11 +29,22 @@ return (
     <div className="sidebar-section members-section">
         <h3>Members</h3>
         <div className="members-list">
+        <div className="member">
             <img src="https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fGZsb3dlcnN8fDB8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200"
                 alt="Member 1" className="member-avatar" />
+            <span className="member-name">Mirela</span>
+        </div>
+        <div className="member">
             <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDU4fHxmbG93ZXJzfHx8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200"
                 alt="Member 2" className="member-avatar" />
-            <button className="invite-button">+Invite</button>
+            <span className="member-name">Anna</span>
+        </div>
+        <div className="member">
+            <img src="https://images.unsplash.com/photo-1505751172876-fa1923c5c528?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDU4fHxmbG93ZXJzfHx8fHx8MTY5ODc4NTA5OQ&ixlib=rb-1.2.1&q=80&w=200"
+                alt="Member 3" className="member-avatar" />
+            <span className="member-name">Priya</span>
+        </div>
+            {/* <button className="invite-button">+Invite</button> */}
         </div>
     </div>
 

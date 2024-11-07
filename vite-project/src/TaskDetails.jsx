@@ -1,32 +1,28 @@
 // TaskDetails.jsx
 import React from "react";
 import { useParams } from "react-router-dom";
-import { formatTitleForUrl } from "./utils/utils.js"; // Import the utility function
+import { createSlug } from "./utils/utils"; // Ensure the path is correct
+console.log(createSlug);
 import "./TaskDetails.css";
 
 const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView }) => {
   const { taskTitle } = useParams();
 
-  // Determine which tasks to display
-  let filteredTasks;
-
-  if (singleTaskView && taskTitle) {
-    // Display a single task based on URL parameter (taskTitle), using formatted title
-    filteredTasks = kanbanList.filter(
-      (task) => formatTitleForUrl(task.title) === taskTitle
-    );
-  } else {
-    // Display all tasks that match the filters
-    filteredTasks = kanbanList.filter((task) => filters[task.category]);
-  }
-
+// Filter tasks based on the slug
+let filteredTasks;
+if (singleTaskView && taskTitle) {
+  filteredTasks = kanbanList.filter(
+    (task) => createSlug(task.title) === taskTitle
+  );
+} else {
+  filteredTasks = kanbanList.filter((task) => filters[task.category]);
+}
   return (
     <div className="task-details-content">
       <div className="task-list">
         {filteredTasks.length > 0 ? (
           filteredTasks.map((task) => (
             <div key={task.id} className="task-card">
-              {/* Conditionally render the delete button only in full task view */}
               {!singleTaskView && (
                 <button
                   className="delete-button"

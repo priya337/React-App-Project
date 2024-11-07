@@ -1,61 +1,90 @@
 // Kanban.jsx
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { formatTitleForUrl } from "./utils/utils.js"; // Import the utility function
+import { useDrag, useDrop } from "react-dnd";
 import "./kanban.css";
+import { createSlug } from "./utils/utils";
 
-function Kanban({ kanbanList, filters, onDeleteTask }) {
+function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus }) {
   const navigate = useNavigate();
 
-  // Function to filter tasks based on their status and active filters
   const filterTasks = (status) =>
     kanbanList.filter((task) => task.status === status && filters[task.category]);
 
-  // Function to handle navigation to the Task Details page with the task details
-  const handleCardClick = (task) => {
-    const urlTitle = formatTitleForUrl(task.title); // Format title for URL
-    navigate(`/task-details/${urlTitle}`, { state: { task } }); // Navigate with task details in state
-  };
+    const handleCardClick = (task) => {
+      const slug = createSlug(task.title);
+      navigate(`/task-details/${slug}`, { state: { task } });
+    };
+    
 
   return (
     <div className="kanban-board">
-      {["To Do", "In Progress", "Done", "Backlog"].map((status) => {
-        const filteredTasks = filterTasks(status);
-        return (
-          <div key={status} className="kanban-column">
-            <h2>{status}</h2>
-            <ul className="kanban-task-list">
-              {filteredTasks.length > 0 ? (
-                filteredTasks.map((task) => (
-                  <li
-                    key={task.id}
-                    className="kanban-item"
-                    onClick={() => handleCardClick(task)} // Navigate to Task Details on click
-                  >
-                    <button
-                      className="delete-button"
-                      onClick={(e) => {
-                        e.stopPropagation(); // Prevent card click from triggering on delete
-                        onDeleteTask(task.id);
-                      }}
-                    >
-                      ✖
-                    </button>
-                    <h3>{task.title}</h3>
-                    <p><strong>Assignee:</strong> {task.assignee}</p>
-                    <p><strong>Status:</strong> {task.status}</p>
-                    <p><strong>Priority:</strong> {task.priority}</p>
-                    <p><strong>Due Date:</strong> {task.dueDate}</p>
-                  </li>
-                ))
-              ) : (
-                <p className="no-tasks-placeholder">No tasks available</p>
-              )}
-            </ul>
-          </div>
-        );
-      })}
+      {["Backlog", "To Do", "In Progress", "Done"].map((status) => (
+        <Column
+          key={status}
+          status={status}
+          tasks={filterTasks(status)}
+          onDrop={(taskId) => onUpdateTaskStatus(taskId, status)}
+        >
+          {filterTasks(status).map((task) => (
+            <Card
+              key={task.id}
+              task={task}
+              onClick={() => handleCardClick(task)}
+              onDelete={onDeleteTask}
+            />
+          ))}
+        </Column>
+      ))}
     </div>
+  );
+}
+
+function Column({ status, children, onDrop }) {
+  const [, drop] = useDrop({
+    accept: "CARD",
+    drop: (item) => onDrop(item.id),
+  });
+
+  return (
+    <div ref={drop} className="kanban-column">
+      <h2>{status}</h2>
+      <ul className="kanban-task-list">{children}</ul>
+    </div>
+  );
+}
+
+function Card({ task, onClick, onDelete }) {
+  const [{ isDragging }, drag] = useDrag({
+    type: "CARD",
+    item: { id: task.id },
+    collect: (monitor) => ({
+      isDragging: !!monitor.isDragging(),
+    }),
+  });
+
+  return (
+    <li
+      ref={drag}
+      className="kanban-item"
+      onClick={onClick}
+      style={{ opacity: isDragging ? 0.5 : 1 }}
+    >
+      <button
+        className="delete-button"
+        onClick={(e) => {
+          e.stopPropagation();
+          onDelete(task.id);
+        }}
+      >
+        ✖
+      </button>
+      <h3>{task.title}</h3>
+      <p><strong>Assignee:</strong> {task.assignee}</p>
+      <p><strong>Status:</strong> {task.status}</p>
+      <p><strong>Priority:</strong> {task.priority}</p>
+      <p><strong>Due Date:</strong> {task.dueDate}</p>
+    </li>
   );
 }
 
