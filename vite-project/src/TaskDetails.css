@@ -4,28 +4,28 @@
     height: 100vh; /* Fill the viewport height */
     gap: 20px;
     background-color: #f4f5f7; /* Light background to match the dashboard */
-    padding: 20px;
+    padding: 0; /* Remove padding for full-width effect */
     box-sizing: border-box;
     overflow: hidden; /* Ensure no scroll within container */
 }
   
 /* Sidebar styling */
 .task-details-container .sidebar {
-    width: 280px;
+    flex: 0 0 280px; /* Fixed width to occupy the full left side */
     background-color: #2d3a4b;
     color: #ffffff;
     padding: 20px;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 40px); /* Adjusted height for overall container padding */
+    height: 100vh; /* Full viewport height */
     overflow: hidden; /* Prevent scroll in sidebar */
 }
   
 /* Content area for Task Details */
 .task-details-content {
     flex-grow: 1;
-    padding: 0 20px; /* Side padding only */
+    padding: 20px;
     box-sizing: border-box;
     overflow: hidden; /* Ensure no internal scroll */
 }
@@ -55,6 +55,9 @@
     font-size: 0.9em;
     color: #333;
     position: relative; /* To position the delete button inside the card */
+    width: 95%; /* Increased width for a larger display card */
+    max-width: 600px; /* Optional max width to keep the card manageable */
+    margin: 0 auto; /* Center the card within the task list */
 }
   
 .task-card h3 {
@@ -99,4 +102,27 @@
     text-align: center;
     margin-top: 20px;
     font-size: 0.9em;
+}
+
+/* Styling for Reset button container */
+.reset-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    padding: 5px; /* Reduced padding for a more compact look */
+}
+
+.reset-button {
+    background-color: #ff6b6b;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 16px; /* Smaller padding */
+    cursor: pointer;
+    font-size: 0.9em;
+    font-weight: 600;
+}
+
+.reset-button:hover {
+    background-color: #ff4b4b;
 }
