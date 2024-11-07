@@ -9,7 +9,6 @@ import About from "./About.jsx";
 import CreateTask from "./CreateTask";
 import Sidebar from "./Sidebar";
 import TaskDetails from "./TaskDetails"; // Import TaskDetails component
-
 import "./App.css";
 import Footer from "./Footer.jsx";
 import { NotFound } from "./components/NotFound.jsx";
@@ -82,6 +81,7 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer />
     </div>
   );
 };
