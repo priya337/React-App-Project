@@ -1,0 +1,16 @@
+.edit-button {
+    position: absolute;
+    top: 8px;
+    right: 30px;
+    background: none;
+    border: none;
+    font-size: 1em;
+    color: #4a90e2;
+    cursor: pointer;
+    padding: 0;
+  }
+  
+  .edit-button:hover {
+    color: #0074d9;
+  }
+  

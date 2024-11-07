@@ -14,12 +14,14 @@ import CreateTask from "./CreateTask";
 import "./App.css";
 import KanbanListData from "../kanban.json"; // Ensure this path is correct
 import { NotFound } from "./components/NotFound.jsx";
+import EditTask from "./EditTask";
 
 const App = () => {
   const navigate = useNavigate();
 
   const originalTaskIds = KanbanListData.map(task => task.id); // IDs of original tasks from JSON
 
+  // Fetch initial kanban list from localStorage or fallback to KanbanListData
   const getInitialKanbanList = () => {
     const savedTasks = localStorage.getItem("kanbanList");
     return savedTasks ? JSON.parse(savedTasks) : KanbanListData;
@@ -36,15 +38,18 @@ const App = () => {
     localStorage.setItem("kanbanList", JSON.stringify(kanbanList));
   }, [kanbanList]);
 
+  // Function to handle adding a new task and navigating to the dashboard
   const handleAddTask = (newTask) => {
     setKanbanList((prevList) => [...prevList, { ...newTask, id: Date.now() }]);
     navigate("/dashboard");
   };
 
+  // Function to handle deleting a task
   const handleDeleteTask = (taskId) => {
     setKanbanList((prevList) => prevList.filter((task) => task.id !== taskId));
   };
 
+  // Function to toggle filters
   const handleFilterChange = (category) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -52,20 +57,26 @@ const App = () => {
     }));
   };
 
+  // Function to handle resetting to the original data, while retaining added tasks
   const handleReset = () => {
-    // Filter out any tasks that are not in the original set of IDs
     const resetList = kanbanList.filter(task => !originalTaskIds.includes(task.id));
-  
-    // Update state and local storage to keep only new tasks, while restoring original tasks
     const updatedList = [...resetList, ...KanbanListData];
     setKanbanList(updatedList);
     localStorage.setItem("kanbanList", JSON.stringify(updatedList));
-  
-    // Reset filters as before
+
     setFilters({ Product: true, Desktop: true, Mobile: true });
     localStorage.setItem("filters", JSON.stringify({ Product: true, Desktop: true, Mobile: true }));
   };
-  
+
+  // Function to handle task updates (edit functionality)
+  const handleEditTask = (updatedTask) => {
+    setKanbanList((prevList) =>
+      prevList.map((task) =>
+        task.id === updatedTask.id ? { ...task, ...updatedTask } : task
+      )
+    );
+  };
+
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="app-container">
@@ -75,6 +86,7 @@ const App = () => {
           <Route path="/about" element={<About />} />
           <Route path="*" element={<NotFound />} />
 
+          {/* Dashboard Page */}
           <Route
             path="/dashboard"
             element={
@@ -103,6 +115,7 @@ const App = () => {
             }
           />
 
+          {/* Task Details Page for Viewing All Tasks */}
           <Route
             path="/task-details"
             element={
@@ -118,11 +131,13 @@ const App = () => {
                   kanbanList={kanbanList}
                   filters={filters}
                   onDeleteTask={handleDeleteTask}
+                  onUpdateTask={handleEditTask} // Add onUpdateTask prop for editing
                 />
               </div>
             }
           />
 
+          {/* Task Details Page for Viewing a Specific Task */}
           <Route
             path="/task-details/:taskTitle"
             element={
@@ -132,15 +147,17 @@ const App = () => {
                   kanbanList={kanbanList}
                   onDeleteTask={handleDeleteTask}
                   singleTaskView={true}
+                  onUpdateTask={handleEditTask} // Add onUpdateTask prop for editing
                 />
               </div>
             }
           />
 
-          <Route
-            path="/create-task"
-            element={<CreateTask onAddTask={handleAddTask} />}
-          />
+          {/* Create Task Page */}
+          <Route path="/create-task" element={<CreateTask onAddTask={handleAddTask} />} />
+
+          {/* Edit Task Page */}
+          <Route path="/edit-task/:taskId" element={<EditTask onSave={handleEditTask} />} />
         </Routes>
         <Footer />
       </div>
