@@ -23,7 +23,7 @@ const EditTask = ({ onSave }) => {
 
   // Initialize state for form fields based on the task object
   const [title, setTitle] = useState(task?.title || "");
-  const [category, setCategory] = useState(task?.category || "");
+  const [category, setCategory] = useState(task?.category || "Product");
   const [assignee, setAssignee] = useState(task?.assignee || "");
   const [status, setStatus] = useState(task?.status || "To Do");
   const [priority, setPriority] = useState(task?.priority || "Medium");
@@ -77,11 +77,14 @@ const EditTask = ({ onSave }) => {
         </label>
         <label>
           Category:
-          <input
-            type="text"
+          <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-          />
+          >
+            <option value="Product">Product</option>
+            <option value="Desktop">Desktop</option>
+            <option value="Mobile">Mobile</option>
+          </select>
         </label>
         <label>
           Assignee:

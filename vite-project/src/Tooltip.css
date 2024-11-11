@@ -1,0 +1,21 @@
+/* Tooltip.css */
+.tooltip-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 200px;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    opacity: 0.9;
+    margin-bottom:100px;
+  }
+  
+  .tooltip-container p {
+    margin: 0;
+  }
+  

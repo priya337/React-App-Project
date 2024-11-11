@@ -1,16 +1,24 @@
 // Kanban.jsx
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDrag, useDrop } from "react-dnd";
 import "./kanban.css";
 import { createSlug } from "./utils/utils";
+import Tooltip from "./Tooltip";
 
-function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus }) {
+function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus, resetToggle }) {
   const navigate = useNavigate();
+  const [filteredKanbanList, setFilteredKanbanList] = useState(kanbanList);
+
+  // Update the filteredKanbanList whenever kanbanList, filters, or resetToggle changes
+  useEffect(() => {
+    const updatedFilteredKanbanList = kanbanList.filter((task) => filters[task.category]);
+    setFilteredKanbanList(updatedFilteredKanbanList);
+  }, [kanbanList, filters, resetToggle]); // Added resetToggle dependency
 
   // Filter tasks based on status and category
   const filterTasks = (status) =>
-    kanbanList.filter((task) => task.status === status && filters[task.category]);
+    filteredKanbanList.filter((task) => task.status === status);
 
   // Navigate to the task details or edit page when a card is clicked
   const handleCardClick = (task) => {
@@ -25,6 +33,19 @@ function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus }) {
 
   return (
     <div className="kanban-board">
+      {/* Tooltip component here to show only once at the bottom right */}
+      <Tooltip message={<div>
+        <h3>Welcome to the Dashboard</h3>
+        <ul>
+          <li><strong>View tasks:</strong> View and manage tasks organized into different columns based on their status.</li>
+          <li><strong>Drag and drop:</strong> Move tasks between columns to update their status easily by dragging and dropping.</li>
+          <li><strong>Create tasks:</strong> Use the "Create Task" button to add new tasks to the board.</li>
+          <li><strong>Edit tasks:</strong> Click the pencil icon on a task card to modify its details.</li>
+          <li><strong>Filter tasks:</strong> Use the checkboxes in the sidebar to filter tasks by category, showing only what you need.</li>
+          <li><strong>Reset data:</strong> Click the "Reset Data" button to restore any filtered or deleted tasks to the default view.</li>
+        </ul>
+      </div>} />
+
       {["Backlog", "To Do", "In Progress", "Done"].map((status) => (
         <Column
           key={status}
@@ -80,7 +101,7 @@ function Card({ task, onClick, onDelete, onEdit }) {
       <button
         className="delete-button"
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation(); // Prevent card click from triggering navigation
           onDelete(task.id);
         }}
       >
@@ -89,7 +110,7 @@ function Card({ task, onClick, onDelete, onEdit }) {
       <button
         className="edit-button"
         onClick={(e) => {
-          e.stopPropagation();
+          e.stopPropagation(); // Prevent card click from triggering navigation
           onEdit(task);
         }}
       >

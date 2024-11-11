@@ -18,13 +18,18 @@ import EditTask from "./EditTask";
 
 const App = () => {
   const navigate = useNavigate();
-
-  const originalTaskIds = KanbanListData.map(task => task.id); // IDs of original tasks from JSON
+  const originalTaskIds = KanbanListData.map((task) => task.id);
 
   // Fetch initial kanban list from localStorage or fallback to KanbanListData
   const getInitialKanbanList = () => {
     const savedTasks = localStorage.getItem("kanbanList");
     return savedTasks ? JSON.parse(savedTasks) : KanbanListData;
+  };
+
+  // Fetch deleted task IDs from localStorage if available
+  const getInitialDeletedTaskIds = () => {
+    const savedDeletedIds = localStorage.getItem("deletedTaskIds");
+    return savedDeletedIds ? JSON.parse(savedDeletedIds) : [];
   };
 
   const [kanbanList, setKanbanList] = useState(getInitialKanbanList);
@@ -33,23 +38,41 @@ const App = () => {
     Desktop: true,
     Mobile: true,
   });
+  const [deletedTaskIds, setDeletedTaskIds] = useState(getInitialDeletedTaskIds);
+  const [resetToggle, setResetToggle] = useState(false); // Toggle to force re-render after reset
 
+  // Save kanban list to localStorage whenever it changes
   useEffect(() => {
     localStorage.setItem("kanbanList", JSON.stringify(kanbanList));
   }, [kanbanList]);
 
-  // Function to handle adding a new task and navigating to the dashboard
+  // Save deletedTaskIds to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("deletedTaskIds", JSON.stringify(deletedTaskIds));
+  }, [deletedTaskIds]);
+
+  // Add a new task and navigate to the dashboard
   const handleAddTask = (newTask) => {
-    setKanbanList((prevList) => [...prevList, { ...newTask, id: Date.now() }]);
+    const updatedList = [...kanbanList, { ...newTask, id: Date.now() }];
+    setKanbanList(updatedList);
+    console.log("Updated kanbanList after adding a new task:", updatedList);
     navigate("/dashboard");
   };
 
-  // Function to handle deleting a task
+  // Delete a task by ID and track it in deletedTaskIds
   const handleDeleteTask = (taskId) => {
-    setKanbanList((prevList) => prevList.filter((task) => task.id !== taskId));
+    console.log("Deleting task with ID:", taskId);
+
+    const updatedList = kanbanList.filter((task) => task.id !== taskId);
+    setKanbanList(updatedList);
+
+    // Track the deleted task ID
+    const updatedDeletedTaskIds = [...deletedTaskIds, taskId];
+    setDeletedTaskIds(updatedDeletedTaskIds);
+    console.log("Updated deletedTaskIds after deletion:", updatedDeletedTaskIds);
   };
 
-  // Function to toggle filters
+  // Toggle filters for task categories
   const handleFilterChange = (category) => {
     setFilters((prevFilters) => ({
       ...prevFilters,
@@ -57,24 +80,46 @@ const App = () => {
     }));
   };
 
-  // Function to handle resetting to the original data, while retaining added tasks
   const handleReset = () => {
-    const resetList = kanbanList.filter(task => !originalTaskIds.includes(task.id));
-    const updatedList = [...resetList, ...KanbanListData];
+    console.log("Reset button clicked in App.jsx");
+
+    // Step 1: Clear deletedTaskIds before applying the reset
+    setDeletedTaskIds([]);
+    localStorage.setItem("deletedTaskIds", JSON.stringify([]));
+
+    // Step 2: Get all tasks from the original JSON data
+    const originalTasks = [...KanbanListData];
+    console.log("Original tasks:", originalTasks);
+
+    // Step 3: Get new tasks that were added after the initial load
+    const newTasks = kanbanList.filter((task) => !originalTaskIds.includes(task.id));
+    console.log("New tasks (not in original):", newTasks);
+
+    // Step 4: Combine original tasks with new tasks
+    const updatedList = [
+      ...originalTasks,
+      ...newTasks
+    ];
+    console.log("Final updated list (original + new tasks):", updatedList);
+
+    // Update the state and localStorage with the final list
     setKanbanList(updatedList);
     localStorage.setItem("kanbanList", JSON.stringify(updatedList));
 
+    // Toggle resetToggle to force re-rendering
+    setResetToggle((prev) => !prev);
+
+    // Reset filters to default values in both state and localStorage
     setFilters({ Product: true, Desktop: true, Mobile: true });
     localStorage.setItem("filters", JSON.stringify({ Product: true, Desktop: true, Mobile: true }));
   };
 
-  // Function to handle task updates (edit functionality)
+  // Update a task (edit functionality)
   const handleEditTask = (updatedTask) => {
-    setKanbanList((prevList) =>
-      prevList.map((task) =>
-        task.id === updatedTask.id ? { ...task, ...updatedTask } : task
-      )
+    const updatedList = kanbanList.map((task) => 
+      (task.id === updatedTask.id ? { ...task, ...updatedTask } : task)
     );
+    setKanbanList(updatedList);
   };
 
   return (
@@ -97,7 +142,7 @@ const App = () => {
                   showCreateTaskButton={true}
                   showTaskDetailsLink={true}
                   showResetButton={true}
-                  onReset={handleReset}
+                  onReset={handleReset} // Independent reset for Sidebar
                 />
                 <Kanban
                   kanbanList={kanbanList}
@@ -110,6 +155,7 @@ const App = () => {
                       )
                     );
                   }}
+                  resetToggle={resetToggle} // Pass resetToggle to force re-render
                 />
               </div>
             }
@@ -125,13 +171,14 @@ const App = () => {
                   onFilterChange={handleFilterChange}
                   showBackToDashboard={true}
                   showResetButton={true}
-                  onReset={handleReset}
+                  onReset={handleReset} // Independent reset for Sidebar
                 />
                 <TaskDetails
                   kanbanList={kanbanList}
                   filters={filters}
                   onDeleteTask={handleDeleteTask}
-                  onUpdateTask={handleEditTask} // Add onUpdateTask prop for editing
+                  onUpdateTask={handleEditTask} // Editing functionality
+                  resetToggle={resetToggle} // Pass resetToggle to force re-render
                 />
               </div>
             }
@@ -147,7 +194,8 @@ const App = () => {
                   kanbanList={kanbanList}
                   onDeleteTask={handleDeleteTask}
                   singleTaskView={true}
-                  onUpdateTask={handleEditTask} // Add onUpdateTask prop for editing
+                  onUpdateTask={handleEditTask} // Editing functionality
+                  resetToggle={resetToggle} // Pass resetToggle to force re-render
                 />
               </div>
             }
