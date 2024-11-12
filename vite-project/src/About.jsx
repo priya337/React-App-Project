@@ -19,17 +19,43 @@ function About() {
               <li>
                 <img src={Priya} alt="profile" className="profile-image" />
                 <br />
-                Priya
+                <span className="name">Priya</span>
+                <ul className="additional-info">
+                  <li>
+                    <strong>Role:</strong> Full-stack Developer
+                  </li>
+                  <li>
+                    <strong>Country:</strong> The Netherlands
+                  </li>
+                </ul>
               </li>
+
               <li>
                 <img src={Mirela} alt="profile" className="profile-image" />
                 <br />
-                Mirela
+                <span className="name">Mirela</span>
+                <ul className="additional-info">
+                  <li>
+                    <strong>Role:</strong> Full-stack Developer
+                  </li>
+                  <li>
+                    <strong>Country:</strong> Spain
+                  </li>
+                </ul>
               </li>
+
               <li>
                 <img src={Anna} alt="profile" className="profile-image" />
                 <br />
-                Anna
+                <span className="name">Anna</span>
+                <ul className="additional-info">
+                  <li>
+                    <strong>Role:</strong> Full-stack Developer
+                  </li>
+                  <li>
+                    <strong>Country:</strong> Germany
+                  </li>
+                </ul>
               </li>
             </ul>
           </div>

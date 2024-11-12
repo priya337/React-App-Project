@@ -33,7 +33,7 @@
   gap: 20px;
   overflow-x: hidden;
 }
-.about-list-items li {
+.about-list-items .name {
   flex: 1;
   text-align: center;
   font-size: 2em;
@@ -50,4 +50,15 @@
 .app-container {
   background-image: url("../public/homepage-background.png");
   background-size: cover;
+}
+
+.about-list-items .additional-info {
+  font-size: 1em; /* Adjust to make it smaller */
+  color: darkblue;
+  font-weight: normal;
+  text-shadow: none;
+  padding: 0;
+  margin: 10px 0 0;
+  list-style-type: none;
+  list-style-position: outside;
 }
