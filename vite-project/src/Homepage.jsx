@@ -15,6 +15,10 @@ function Homepage() {
       <p>
         Clear organisation and priority with grouped lists:{" "}
         <strong>
+          <span style={{ color: "backlog" }}>Backlog</span>
+        </strong>
+        ,{" "}
+        <strong>
           <span style={{ color: "red" }}>To Do</span>
         </strong>
         ,{" "}
