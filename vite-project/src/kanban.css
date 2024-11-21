@@ -3,7 +3,7 @@
     display: flex;
     height: 100vh; /* Fill the viewport height */
     gap: 20px;
-    overflow: hidden;
+    overflow: hidden; /* Ensure that content doesn't overflow outside the container */
 }
 
 /* Sidebar styling - Matches the style in Sidebar.css */
@@ -15,8 +15,9 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    height: 100vh; /* Ensure sidebar takes full viewport height */
     flex-shrink: 0; /* Prevents sidebar from resizing */
+    overflow-y: auto; /* Allow the sidebar to scroll if content overflows */
 }
 
 /* Kanban board area */
@@ -26,8 +27,8 @@
     justify-content: space-between;
     padding: 20px;
     gap: 20px;
-    overflow-y: auto;
-    max-width: 1200px; /* Ensures columns fit within the viewport */
+    overflow-x: auto; /* Horizontal scroll for columns if needed */
+    max-width: 100%; /* Ensure it uses the available space */
     margin: 0 auto; /* Centers the board within the container */
 }
 
@@ -39,9 +40,11 @@
     background-color: #ffffff;
     border-radius: 10px;
     box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-    padding: 15px;
+    padding: 20px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto; /* Allow the column to scroll if tasks overflow */
+    height: calc(100vh - 10px); /* Height minus padding for better fit */
 }
 
 /* Remove default list styles */
@@ -49,6 +52,8 @@
     list-style-type: none;
     padding: 0;
     margin: 0;
+    flex-grow: 1;
+    overflow-y: auto; /* Make sure the list can scroll */
 }
 
 /* Task card styling */

@@ -9,12 +9,24 @@ import Tooltip from "./Tooltip";
 function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus, resetToggle }) {
   const navigate = useNavigate();
   const [filteredKanbanList, setFilteredKanbanList] = useState(kanbanList);
+  const [initialKanbanList, setInitialKanbanList] = useState([]);
+
+  useEffect(() => {
+    if (initialKanbanList.length === 0) {
+      setInitialKanbanList(kanbanList); // Store initial list for reset
+    }
+  }, [kanbanList]);
 
   // Update the filteredKanbanList whenever kanbanList, filters, or resetToggle changes
   useEffect(() => {
     const updatedFilteredKanbanList = kanbanList.filter((task) => filters[task.category]);
     setFilteredKanbanList(updatedFilteredKanbanList);
-  }, [kanbanList, filters, resetToggle]); // Added resetToggle dependency
+  }, [kanbanList, filters, resetToggle]);
+
+  // Handle reset button
+  const handleReset = () => {
+    setFilteredKanbanList(initialKanbanList);
+  };
 
   // Filter tasks based on status and category
   const filterTasks = (status) =>
@@ -46,7 +58,9 @@ function Kanban({ kanbanList, filters, onDeleteTask, onUpdateTaskStatus, resetTo
         </ul>
       </div>} />
 
-      {["Backlog", "To Do", "In Progress", "Done"].map((status) => (
+      
+
+      {['Backlog', 'To Do', 'In Progress', 'Done'].map((status) => (
         <Column
           key={status}
           status={status}

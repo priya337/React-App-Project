@@ -5,7 +5,7 @@ import { createSlug } from "./utils/utils";
 import Tooltip from "./Tooltip"; // Import Tooltip component
 import "./TaskDetails.css";
 
-const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpdateTask, resetToggle }) => {
+const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpdateTask, resetToggle, onReset }) => {
   const { taskTitle } = useParams();
 
   // State to manage the filtered tasks
@@ -14,6 +14,15 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
   // State to manage editing mode for a specific task
   const [editingTaskId, setEditingTaskId] = useState(null);
   const [editTask, setEditTask] = useState({});
+
+  // State to hold the initial kanban list for reset purposes
+  const [initialKanbanList, setInitialKanbanList] = useState([]);
+
+  useEffect(() => {
+    if (initialKanbanList.length === 0) {
+      setInitialKanbanList(kanbanList); // Set initial list on first load
+    }
+  }, [kanbanList]);
 
   // Update the filtered tasks whenever `kanbanList`, `filters`, `resetToggle`, or `taskTitle` changes
   useEffect(() => {
@@ -37,6 +46,14 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
     if (onUpdateTask && editTask.id) {
       onUpdateTask(editTask);
       setEditingTaskId(null); // Exit edit mode
+    }
+  };
+
+  // Handle reset button
+  const handleReset = () => {
+    setFilteredTasks(initialKanbanList);
+    if (onReset) {
+      onReset(); // Trigger any reset actions from parent
     }
   };
 
@@ -123,8 +140,16 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
                     </select>
                   </label>
                   <label>
-                    Due Date:
+                    DueDate:
                     <input type="date" name="dueDate" value={editTask.dueDate || ""} onChange={handleInputChange} />
+                  </label>
+                  <label>
+                    Category:
+                    <select name="category" value={editTask.category || "Product"} onChange={handleInputChange}>
+                      <option value="Product">Product</option>
+                      <option value="Desktop">Desktop</option>
+                      <option value="Mobile">Mobile</option>
+                    </select>
                   </label>
                   <label>
                     Description:
@@ -173,9 +198,12 @@ const TaskDetails = ({ kanbanList, filters, onDeleteTask, singleTaskView, onUpda
             </div>
           ))
         ) : (
-          <p>No tasks available</p>
+          <p className="no-tasks-placeholder">No tasks available</p>
         )}
       </div>
+      <button onClick={handleReset} className="reset-button">
+        Reset Data
+      </button>
     </div>
   );
 };
