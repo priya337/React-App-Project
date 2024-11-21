@@ -15565,8 +15565,9 @@ const App = () => {
     setKanbanList(updatedList);
     localStorage.setItem("kanbanList", JSON.stringify(updatedList));
     setResetToggle((prev) => !prev);
-    setFilters({ Product: true, Desktop: true, Mobile: true });
-    localStorage.setItem("filters", JSON.stringify({ Product: true, Desktop: true, Mobile: true }));
+    const defaultFilters = { Product: true, Desktop: true, Mobile: true };
+    setFilters(defaultFilters);
+    localStorage.setItem("filters", JSON.stringify(defaultFilters));
   };
   const handleEditTask = (updatedTask) => {
     const updatedList = kanbanList.map(
@@ -15581,91 +15582,73 @@ const App = () => {
       /* @__PURE__ */ jsxRuntimeExports.jsxs(Routes, { children: [
         /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/", element: /* @__PURE__ */ jsxRuntimeExports.jsx(Homepage, {}) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/about", element: /* @__PURE__ */ jsxRuntimeExports.jsx(About, {}) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NotFound, {}) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Route,
-          {
-            path: "/dashboard",
-            element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dashboard-container", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Sidebar,
-                {
-                  filters,
-                  onFilterChange: handleFilterChange,
-                  showCreateTaskButton: true,
-                  showTaskDetailsLink: true,
-                  showResetButton: true,
-                  onReset: handleReset
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Kanban$1,
-                {
-                  kanbanList,
-                  filters,
-                  onDeleteTask: handleDeleteTask,
-                  onUpdateTaskStatus: (taskId, newStatus) => {
-                    setKanbanList(
-                      (prevList) => prevList.map(
-                        (task) => task.id === taskId ? { ...task, status: newStatus } : task
-                      )
-                    );
-                  },
-                  resetToggle
-                }
-              )
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Route,
-          {
-            path: "/task-details",
-            element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "task-details-container", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                Sidebar,
-                {
-                  filters,
-                  onFilterChange: handleFilterChange,
-                  showBackToDashboard: true,
-                  showResetButton: true,
-                  onReset: handleReset
-                }
-              ),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                TaskDetails,
-                {
-                  kanbanList,
-                  filters,
-                  onDeleteTask: handleDeleteTask,
-                  onUpdateTask: handleEditTask,
-                  resetToggle
-                }
-              )
-            ] })
-          }
-        ),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(
-          Route,
-          {
-            path: "/task-details/:taskTitle",
-            element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "task-details-container", children: [
-              /* @__PURE__ */ jsxRuntimeExports.jsx(Sidebar, { showBackToDashboard: true, showResetButton: false }),
-              /* @__PURE__ */ jsxRuntimeExports.jsx(
-                TaskDetails,
-                {
-                  kanbanList,
-                  onDeleteTask: handleDeleteTask,
-                  singleTaskView: true,
-                  onUpdateTask: handleEditTask,
-                  resetToggle
-                }
-              )
-            ] })
-          }
-        ),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/dashboard", element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "dashboard-container", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Sidebar,
+            {
+              filters,
+              onFilterChange: handleFilterChange,
+              showCreateTaskButton: true,
+              showTaskDetailsLink: true,
+              showResetButton: true,
+              onReset: handleReset
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Kanban$1,
+            {
+              kanbanList,
+              filters,
+              onDeleteTask: handleDeleteTask,
+              onUpdateTaskStatus: (taskId, newStatus) => {
+                setKanbanList(
+                  (prevList) => prevList.map(
+                    (task) => task.id === taskId ? { ...task, status: newStatus } : task
+                  )
+                );
+              },
+              resetToggle
+            }
+          )
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/task-details", element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "task-details-container", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            Sidebar,
+            {
+              filters,
+              onFilterChange: handleFilterChange,
+              showBackToDashboard: true,
+              showResetButton: true,
+              onReset: handleReset
+            }
+          ),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            TaskDetails,
+            {
+              kanbanList,
+              filters,
+              onDeleteTask: handleDeleteTask,
+              onUpdateTask: handleEditTask,
+              resetToggle
+            }
+          )
+        ] }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/task-details/:taskTitle", element: /* @__PURE__ */ jsxRuntimeExports.jsxs("div", { className: "task-details-container", children: [
+          /* @__PURE__ */ jsxRuntimeExports.jsx(Sidebar, { showBackToDashboard: true, showResetButton: false }),
+          /* @__PURE__ */ jsxRuntimeExports.jsx(
+            TaskDetails,
+            {
+              kanbanList,
+              onDeleteTask: handleDeleteTask,
+              singleTaskView: true,
+              onUpdateTask: handleEditTask,
+              resetToggle
+            }
+          )
+        ] }) }),
         /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/create-task", element: /* @__PURE__ */ jsxRuntimeExports.jsx(CreateTask, { onAddTask: handleAddTask }) }),
-        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/edit-task/:taskId", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EditTask, { onSave: handleEditTask }) })
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "/edit-task/:taskId", element: /* @__PURE__ */ jsxRuntimeExports.jsx(EditTask, { onSave: handleEditTask }) }),
+        /* @__PURE__ */ jsxRuntimeExports.jsx(Route, { path: "*", element: /* @__PURE__ */ jsxRuntimeExports.jsx(NotFound, {}) })
       ] }),
       /* @__PURE__ */ jsxRuntimeExports.jsx(displayFooter, {})
     ] }) })
