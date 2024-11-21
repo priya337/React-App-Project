@@ -1,5 +1,5 @@
 .container {
-  background-image: url("../public/homepage-background.png");
+  background-image: url("/homepage-background.png");
   background-size: cover;
   display: flex;
   flex-direction: column;
